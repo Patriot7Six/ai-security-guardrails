@@ -7,7 +7,7 @@ Runs the offline demo end to end and checks the results with plain assertions.
 Covers the same ground as the Pester suite for machines without Pester, and
 also runs both scripts in a child process to check their console output and
 exit codes. CI runs it after the Pester suite. Exits with code 1 if any check
-fails.
+fails and with code 0 when all checks pass.
 #>
 [CmdletBinding()]
 param()
@@ -200,3 +200,8 @@ if ($script:failures.Count -gt 0) {
     $script:failures | ForEach-Object { "FAILED: $_" } | Out-Host
     exit 1
 }
+
+# The last child process above exits non-zero on purpose. Exit 0 here so a
+# caller that reads $LASTEXITCODE, as the GitHub Actions pwsh shell does, gets
+# the result of the checks and not the exit code of that child.
+exit 0
