@@ -1,0 +1,39 @@
+{
+  "description": "Patterns that flag likely AI apps by display name or publisher. This is a heuristic. Review every match, and add the vendors your users actually request. Patterns are .NET regular expressions, matched without regard to case. Vendor patterns are checked first and count as the stronger match.",
+  "firstPartyTenantIds": [
+    "f8cdef31-a31e-4b4a-93e4-5f571e91255a",
+    "72f988bf-86f1-41af-91ab-2d7cd011db47"
+  ],
+  "vendorPatterns": [
+    "\\bOpenAI\\b",
+    "\\bChatGPT\\b",
+    "\\bAnthropic\\b",
+    "\\bClaude\\b",
+    "\\bGemini\\b",
+    "\\bPerplexity\\b",
+    "\\bOtter\\b",
+    "\\bFireflies\\b",
+    "\\bGrammarly\\b",
+    "\\bJasper\\b",
+    "\\bCopy\\.ai\\b",
+    "\\bNotion AI\\b",
+    "\\bRead AI\\b",
+    "\\bFathom\\b",
+    "\\bMistral\\b",
+    "\\bCohere\\b",
+    "\\bDeepSeek\\b",
+    "\\bMidjourney\\b"
+  ],
+  "genericPatterns": [
+    "\\bAI\\b",
+    "\\bGPT\\b",
+    "\\bLLM\\b",
+    "Copilot",
+    "Assistant",
+    "Transcri",
+    "Summar",
+    "Notetaker",
+    "Note taker",
+    "Chatbot"
+  ]
+}

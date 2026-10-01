@@ -1,0 +1,58 @@
+{
+  "description": "Weights for scoring consent grants. Keys are permission values. They match on any resource API without regard to case, so Exchange Online values sit next to the Microsoft Graph ones. Adjust the weights to fit your own data classification. Scores cap at 100.",
+  "delegated": {
+    "Mail.Read": 30,
+    "Mail.ReadWrite": 40,
+    "Mail.Send": 40,
+    "Files.Read.All": 35,
+    "Files.ReadWrite.All": 45,
+    "Sites.Read.All": 35,
+    "Sites.ReadWrite.All": 45,
+    "Calendars.Read": 15,
+    "Calendars.ReadWrite": 20,
+    "OnlineMeetings.Read": 15,
+    "OnlineMeetingTranscript.Read.All": 35,
+    "Chat.Read": 30,
+    "ChannelMessage.Read.All": 35,
+    "Notes.Read.All": 25,
+    "Contacts.Read": 10,
+    "User.Read.All": 20,
+    "Directory.Read.All": 30,
+    "Directory.ReadWrite.All": 60,
+    "MailboxSettings.ReadWrite": 30,
+    "EWS.AccessAsUser.All": 50
+  },
+  "application": {
+    "Mail.Read": 60,
+    "Mail.ReadWrite": 70,
+    "Mail.Send": 70,
+    "Files.Read.All": 60,
+    "Files.ReadWrite.All": 75,
+    "Sites.Read.All": 60,
+    "Sites.ReadWrite.All": 75,
+    "Chat.Read.All": 60,
+    "Calendars.Read": 30,
+    "Calendars.ReadWrite": 40,
+    "User.Read.All": 25,
+    "Directory.Read.All": 40,
+    "Directory.ReadWrite.All": 85,
+    "full_access_as_app": 90
+  },
+  "modifiers": {
+    "additionalSensitivePermission": 5,
+    "tenantWideConsent": 15,
+    "unverifiedPublisher": 15,
+    "offlineAccessWithDataScope": 10,
+    "manyUsers": 10,
+    "manyUsersThreshold": 10
+  },
+  "levels": {
+    "Critical": 80,
+    "High": 50,
+    "Medium": 25
+  },
+  "retiringPermissions": {
+    "full_access_as_app": "full_access_as_app is an Exchange Web Services (EWS) permission. Microsoft's EWS retirement in Exchange Online starts blocking non-Microsoft apps on October 1, 2026, in phases, and fully disables EWS in April 2027. Confirm the app has moved to Microsoft Graph, then remove this grant.",
+    "EWS.AccessAsUser.All": "EWS.AccessAsUser.All is an Exchange Web Services (EWS) permission. Microsoft's EWS retirement in Exchange Online starts blocking non-Microsoft apps on October 1, 2026, in phases, and fully disables EWS in April 2027. Confirm the app has moved to Microsoft Graph, then remove this grant."
+  }
+}

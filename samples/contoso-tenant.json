@@ -1,0 +1,564 @@
+{
+  "_note": "Synthetic data for the Contoso demo tenant. Service principal object IDs, grant IDs, app role IDs, user IDs, and third-party app IDs are placeholders. The app IDs for Microsoft Graph, Office 365 Exchange Online, and Microsoft Teams and the Microsoft owner tenant ID are the published values.",
+  "schemaVersion": 1,
+  "tenantId": "a1b2c3d4-0000-4000-8000-00000000c0f1",
+  "tenantLabel": "Contoso",
+  "capturedAt": "2026-09-28T15:00:00Z",
+  "servicePrincipals": [
+    {
+      "id": "5e000000-0000-4000-8000-000000000001",
+      "appId": "00000003-0000-0000-c000-000000000000",
+      "displayName": "Microsoft Graph",
+      "publisherName": "Microsoft Services",
+      "verifiedPublisher": {
+        "displayName": null,
+        "verifiedPublisherId": null,
+        "addedDateTime": null
+      },
+      "appOwnerOrganizationId": "f8cdef31-a31e-4b4a-93e4-5f571e91255a",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": [
+        {
+          "id": "7a000000-0000-4000-8000-000000000001",
+          "value": "Mail.Read",
+          "displayName": "Read mail in all mailboxes",
+          "allowedMemberTypes": [
+            "Application"
+          ],
+          "isEnabled": true
+        },
+        {
+          "id": "7a000000-0000-4000-8000-000000000002",
+          "value": "Files.Read.All",
+          "displayName": "Read files in all site collections",
+          "allowedMemberTypes": [
+            "Application"
+          ],
+          "isEnabled": true
+        },
+        {
+          "id": "7a000000-0000-4000-8000-000000000003",
+          "value": "Sites.Read.All",
+          "displayName": "Read items in all site collections",
+          "allowedMemberTypes": [
+            "Application"
+          ],
+          "isEnabled": true
+        },
+        {
+          "id": "7a000000-0000-4000-8000-000000000004",
+          "value": "User.Read.All",
+          "displayName": "Read all users' full profiles",
+          "allowedMemberTypes": [
+            "Application"
+          ],
+          "isEnabled": true
+        }
+      ]
+    },
+    {
+      "id": "5e000000-0000-4000-8000-000000000002",
+      "appId": "00000002-0000-0ff1-ce00-000000000000",
+      "displayName": "Office 365 Exchange Online",
+      "publisherName": "Microsoft Services",
+      "verifiedPublisher": {
+        "displayName": null,
+        "verifiedPublisherId": null,
+        "addedDateTime": null
+      },
+      "appOwnerOrganizationId": "f8cdef31-a31e-4b4a-93e4-5f571e91255a",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": [
+        {
+          "id": "7a000000-0000-4000-8000-000000000005",
+          "value": "full_access_as_app",
+          "displayName": "Use Exchange Web Services with full access to all mailboxes",
+          "allowedMemberTypes": [
+            "Application"
+          ],
+          "isEnabled": true
+        }
+      ]
+    },
+    {
+      "id": "5e000000-0000-4000-8000-000000000003",
+      "appId": "1fec8e78-bce4-4aaf-ab1b-5451cc387264",
+      "displayName": "Microsoft Teams",
+      "publisherName": "Microsoft Services",
+      "verifiedPublisher": {
+        "displayName": null,
+        "verifiedPublisherId": null,
+        "addedDateTime": null
+      },
+      "appOwnerOrganizationId": "f8cdef31-a31e-4b4a-93e4-5f571e91255a",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": []
+    },
+    {
+      "id": "5e000000-0000-4000-8000-000000000010",
+      "appId": "a0000000-0000-4000-8000-000000000010",
+      "displayName": "SupportBot GPT Connector",
+      "publisherName": "SupportBot Labs",
+      "verifiedPublisher": {
+        "displayName": "SupportBot Labs",
+        "verifiedPublisherId": "9000010",
+        "addedDateTime": "2025-03-14T00:00:00Z"
+      },
+      "appOwnerOrganizationId": "b0000000-0000-4000-8000-000000000010",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": []
+    },
+    {
+      "id": "5e000000-0000-4000-8000-000000000011",
+      "appId": "a0000000-0000-4000-8000-000000000011",
+      "displayName": "InboxPilot AI",
+      "publisherName": "InboxPilot",
+      "verifiedPublisher": {
+        "displayName": null,
+        "verifiedPublisherId": null,
+        "addedDateTime": null
+      },
+      "appOwnerOrganizationId": "b0000000-0000-4000-8000-000000000011",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": []
+    },
+    {
+      "id": "5e000000-0000-4000-8000-000000000012",
+      "appId": "a0000000-0000-4000-8000-000000000012",
+      "displayName": "DataChat Analyst",
+      "publisherName": "DataChat LLM Labs",
+      "verifiedPublisher": {
+        "displayName": null,
+        "verifiedPublisherId": null,
+        "addedDateTime": null
+      },
+      "appOwnerOrganizationId": "b0000000-0000-4000-8000-000000000012",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": []
+    },
+    {
+      "id": "5e000000-0000-4000-8000-000000000013",
+      "appId": "a0000000-0000-4000-8000-000000000013",
+      "displayName": "Summarize Everything",
+      "publisherName": "Summarize Everything Inc",
+      "verifiedPublisher": {
+        "displayName": null,
+        "verifiedPublisherId": null,
+        "addedDateTime": null
+      },
+      "appOwnerOrganizationId": "b0000000-0000-4000-8000-000000000013",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": []
+    },
+    {
+      "id": "5e000000-0000-4000-8000-000000000014",
+      "appId": "a0000000-0000-4000-8000-000000000014",
+      "displayName": "Contoso CareDesk Assistant",
+      "publisherName": "Contoso",
+      "verifiedPublisher": {
+        "displayName": null,
+        "verifiedPublisherId": null,
+        "addedDateTime": null
+      },
+      "appOwnerOrganizationId": "a1b2c3d4-0000-4000-8000-00000000c0f1",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": []
+    },
+    {
+      "id": "5e000000-0000-4000-8000-000000000015",
+      "appId": "a0000000-0000-4000-8000-000000000015",
+      "displayName": "NoteGenie AI Meeting Notes",
+      "publisherName": "NoteGenie Inc",
+      "verifiedPublisher": {
+        "displayName": "NoteGenie Inc",
+        "verifiedPublisherId": "9000015",
+        "addedDateTime": "2025-03-14T00:00:00Z"
+      },
+      "appOwnerOrganizationId": "b0000000-0000-4000-8000-000000000015",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": []
+    },
+    {
+      "id": "5e000000-0000-4000-8000-000000000016",
+      "appId": "a0000000-0000-4000-8000-000000000016",
+      "displayName": "QuickDraft AI Writer",
+      "publisherName": "QuickDraft Software",
+      "verifiedPublisher": {
+        "displayName": "QuickDraft Software",
+        "verifiedPublisherId": "9000016",
+        "addedDateTime": "2025-03-14T00:00:00Z"
+      },
+      "appOwnerOrganizationId": "b0000000-0000-4000-8000-000000000016",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": []
+    },
+    {
+      "id": "5e000000-0000-4000-8000-000000000017",
+      "appId": "a0000000-0000-4000-8000-000000000017",
+      "displayName": "FieldOps Scheduler",
+      "publisherName": "FieldOps Software",
+      "verifiedPublisher": {
+        "displayName": "FieldOps Software",
+        "verifiedPublisherId": "9000017",
+        "addedDateTime": "2025-03-14T00:00:00Z"
+      },
+      "appOwnerOrganizationId": "b0000000-0000-4000-8000-000000000017",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": []
+    },
+    {
+      "id": "5e000000-0000-4000-8000-000000000018",
+      "appId": "a0000000-0000-4000-8000-000000000018",
+      "displayName": "Payroll Portal SSO",
+      "publisherName": "Northwind Payroll",
+      "verifiedPublisher": {
+        "displayName": "Northwind Payroll",
+        "verifiedPublisherId": "9000018",
+        "addedDateTime": "2025-03-14T00:00:00Z"
+      },
+      "appOwnerOrganizationId": "b0000000-0000-4000-8000-000000000018",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appRoleAssignmentRequired": false,
+      "appRoles": []
+    }
+  ],
+  "oauth2PermissionGrants": [
+    {
+      "id": "syn-grant-teams-all",
+      "clientId": "5e000000-0000-4000-8000-000000000003",
+      "consentType": "AllPrincipals",
+      "principalId": null,
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read"
+    },
+    {
+      "id": "syn-grant-inboxpilot-all",
+      "clientId": "5e000000-0000-4000-8000-000000000011",
+      "consentType": "AllPrincipals",
+      "principalId": null,
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "openid profile offline_access User.Read Mail.ReadWrite Mail.Send"
+    },
+    {
+      "id": "syn-grant-datachat-u01",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000001",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u02",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000002",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u03",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000003",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u04",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000004",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u05",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000005",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u06",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000006",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u07",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000007",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u08",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000008",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u09",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000009",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u10",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000010",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u11",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000011",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u12",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000012",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u13",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000013",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-datachat-u14",
+      "clientId": "5e000000-0000-4000-8000-000000000012",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000014",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read User.Read.All Files.Read.All Sites.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-summarize-u15",
+      "clientId": "5e000000-0000-4000-8000-000000000013",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000015",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Mail.Read Files.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-summarize-u16",
+      "clientId": "5e000000-0000-4000-8000-000000000013",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000016",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Mail.Read Files.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-summarize-u17",
+      "clientId": "5e000000-0000-4000-8000-000000000013",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000017",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Mail.Read Files.Read.All offline_access"
+    },
+    {
+      "id": "syn-grant-caredesk-all",
+      "clientId": "5e000000-0000-4000-8000-000000000014",
+      "consentType": "AllPrincipals",
+      "principalId": null,
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "openid profile User.Read Mail.ReadWrite"
+    },
+    {
+      "id": "syn-grant-notegenie-u01",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000001",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-notegenie-u02",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000002",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-notegenie-u03",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000003",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-notegenie-u04",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000004",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-notegenie-u05",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000005",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-notegenie-u06",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000006",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-notegenie-u07",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000007",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-notegenie-u08",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000008",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-notegenie-u09",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000009",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-notegenie-u10",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000010",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-notegenie-u11",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000011",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-notegenie-u12",
+      "clientId": "5e000000-0000-4000-8000-000000000015",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000012",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read OnlineMeetings.Read offline_access"
+    },
+    {
+      "id": "syn-grant-quickdraft-u18",
+      "clientId": "5e000000-0000-4000-8000-000000000016",
+      "consentType": "Principal",
+      "principalId": "0e000000-0000-4000-8000-000000000018",
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "openid profile User.Read offline_access"
+    },
+    {
+      "id": "syn-grant-fieldops-all",
+      "clientId": "5e000000-0000-4000-8000-000000000017",
+      "consentType": "AllPrincipals",
+      "principalId": null,
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": " User.Read Calendars.ReadWrite"
+    },
+    {
+      "id": "syn-grant-payroll-all",
+      "clientId": "5e000000-0000-4000-8000-000000000018",
+      "consentType": "AllPrincipals",
+      "principalId": null,
+      "resourceId": "5e000000-0000-4000-8000-000000000001",
+      "scope": "openid profile email User.Read"
+    }
+  ],
+  "appRoleAssignments": [
+    {
+      "id": "syn-assign-supportbot-exo",
+      "appRoleId": "7a000000-0000-4000-8000-000000000005",
+      "principalId": "5e000000-0000-4000-8000-000000000010",
+      "principalType": "ServicePrincipal",
+      "principalDisplayName": "SupportBot GPT Connector",
+      "resourceId": "5e000000-0000-4000-8000-000000000002",
+      "resourceDisplayName": "Office 365 Exchange Online",
+      "createdDateTime": "2026-02-11T16:20:00Z"
+    }
+  ],
+  "authorizationPolicy": {
+    "id": "authorizationPolicy",
+    "displayName": "Authorization Policy",
+    "defaultUserRolePermissions": {
+      "allowedToCreateApps": true,
+      "allowedToCreateSecurityGroups": true,
+      "allowedToReadOtherUsers": true,
+      "permissionGrantPoliciesAssigned": [
+        "ManagePermissionGrantsForSelf.microsoft-user-default-legacy",
+        "ManagePermissionGrantsForOwnedResource.microsoft-dynamically-managed-permissions-for-team",
+        "ManagePermissionGrantsForOwnedResource.microsoft-dynamically-managed-permissions-for-chat"
+      ]
+    }
+  },
+  "adminConsentRequestPolicy": {
+    "isEnabled": false,
+    "notifyReviewers": false,
+    "remindersEnabled": false,
+    "requestDurationInDays": 30,
+    "reviewers": [],
+    "version": 0
+  }
+}

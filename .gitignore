@@ -1,0 +1,7 @@
+# Report output from local runs
+out/
+
+# Snapshots of real tenants hold directory data. Never commit them.
+*.snapshot.json
+
+.DS_Store

@@ -1,0 +1,305 @@
+{
+  "tenantLabel": "Contoso",
+  "tenantId": "a1b2c3d4-0000-4000-8000-00000000c0f1",
+  "snapshotCapturedAt": "2026-09-28 15:00 UTC",
+  "generatedAt": "2026-10-01 19:16 UTC",
+  "userConsent": {
+    "mode": "AllApps",
+    "description": "Users can consent to any app for permissions that do not need admin consent. This is the legacy setting.",
+    "permissionGrantPoliciesAssigned": [
+      "ManagePermissionGrantsForSelf.microsoft-user-default-legacy",
+      "ManagePermissionGrantsForOwnedResource.microsoft-dynamically-managed-permissions-for-team",
+      "ManagePermissionGrantsForOwnedResource.microsoft-dynamically-managed-permissions-for-chat"
+    ]
+  },
+  "adminConsentWorkflow": {
+    "isEnabled": false,
+    "reviewerCount": 0
+  },
+  "summary": {
+    "Critical": 3,
+    "High": 2,
+    "Medium": 1,
+    "Low": 1
+  },
+  "findings": [
+    {
+      "AppDisplayName": "SupportBot GPT Connector",
+      "AppId": "a0000000-0000-4000-8000-000000000010",
+      "ServicePrincipalId": "5e000000-0000-4000-8000-000000000010",
+      "Publisher": "SupportBot Labs",
+      "PublisherStatus": "Verified",
+      "IsAIApp": true,
+      "AIMatch": "Name pattern '\\bGPT\\b' on displayName",
+      "GrantType": "Application",
+      "Resource": "Office 365 Exchange Online",
+      "ConsentScope": "AppOnly",
+      "UserCount": 0,
+      "Permissions": [
+        "full_access_as_app"
+      ],
+      "SensitivePermissions": [
+        "full_access_as_app"
+      ],
+      "Score": 90,
+      "Level": "Critical",
+      "Reasons": [
+        "full_access_as_app is the highest weighted permission (90)",
+        "Runs as the app with no signed-in user and reaches data across the tenant unless scoped"
+      ],
+      "Notes": [
+        "full_access_as_app is an Exchange Web Services (EWS) permission. Microsoft's EWS retirement in Exchange Online starts blocking non-Microsoft apps on October 1, 2026, in phases, and fully disables EWS in April 2027. Confirm the app has moved to Microsoft Graph, then remove this grant."
+      ],
+      "RecommendedAction": "Confirm the business owner and data flow today. If there is no approved use, remove the app role assignment and disable sign-in for the app.",
+      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri 'v1.0/servicePrincipals/5e000000-0000-4000-8000-000000000010/appRoleAssignments/syn-assign-supportbot-exo'",
+      "GrantIds": [
+        "syn-assign-supportbot-exo"
+      ]
+    },
+    {
+      "AppDisplayName": "InboxPilot AI",
+      "AppId": "a0000000-0000-4000-8000-000000000011",
+      "ServicePrincipalId": "5e000000-0000-4000-8000-000000000011",
+      "Publisher": "InboxPilot",
+      "PublisherStatus": "Unverified",
+      "IsAIApp": true,
+      "AIMatch": "Name pattern '\\bAI\\b' on displayName",
+      "GrantType": "Delegated",
+      "Resource": "Microsoft Graph",
+      "ConsentScope": "AllUsers",
+      "UserCount": 0,
+      "Permissions": [
+        "Mail.ReadWrite",
+        "Mail.Send",
+        "offline_access",
+        "openid",
+        "profile",
+        "User.Read"
+      ],
+      "SensitivePermissions": [
+        "Mail.ReadWrite",
+        "Mail.Send"
+      ],
+      "Score": 85,
+      "Level": "Critical",
+      "Reasons": [
+        "Mail.ReadWrite is the highest weighted permission (40)",
+        "1 more sensitive permission (+5)",
+        "Consent granted for every user in the tenant (+15)",
+        "Publisher is not verified (+15)",
+        "offline_access gives the app refresh tokens, so it can reach this data while the user is away (+10)"
+      ],
+      "Notes": [],
+      "RecommendedAction": "Confirm the business owner and data flow today. If there is no approved use, remove the grant and disable sign-in for the app.",
+      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri 'v1.0/oauth2PermissionGrants/syn-grant-inboxpilot-all'",
+      "GrantIds": [
+        "syn-grant-inboxpilot-all"
+      ]
+    },
+    {
+      "AppDisplayName": "DataChat Analyst",
+      "AppId": "a0000000-0000-4000-8000-000000000012",
+      "ServicePrincipalId": "5e000000-0000-4000-8000-000000000012",
+      "Publisher": "DataChat LLM Labs",
+      "PublisherStatus": "Unverified",
+      "IsAIApp": true,
+      "AIMatch": "Name pattern '\\bLLM\\b' on publisherName",
+      "GrantType": "Delegated",
+      "Resource": "Microsoft Graph",
+      "ConsentScope": "SomeUsers",
+      "UserCount": 14,
+      "Permissions": [
+        "Files.Read.All",
+        "offline_access",
+        "Sites.Read.All",
+        "User.Read",
+        "User.Read.All"
+      ],
+      "SensitivePermissions": [
+        "Files.Read.All",
+        "Sites.Read.All",
+        "User.Read.All"
+      ],
+      "Score": 80,
+      "Level": "Critical",
+      "Reasons": [
+        "Files.Read.All is the highest weighted permission (35)",
+        "2 more sensitive permissions (+10)",
+        "Publisher is not verified (+15)",
+        "offline_access gives the app refresh tokens, so it can reach this data while the user is away (+10)",
+        "14 users consented, at or above the threshold of 10 (+10)"
+      ],
+      "Notes": [],
+      "RecommendedAction": "Confirm the business owner and data flow today. If there is no approved use, remove the grant and disable sign-in for the app.",
+      "RemovalHint": "'syn-grant-datachat-u01', 'syn-grant-datachat-u02', 'syn-grant-datachat-u03', 'syn-grant-datachat-u04', 'syn-grant-datachat-u05', 'syn-grant-datachat-u06', 'syn-grant-datachat-u07', 'syn-grant-datachat-u08', 'syn-grant-datachat-u09', 'syn-grant-datachat-u10', 'syn-grant-datachat-u11', 'syn-grant-datachat-u12', 'syn-grant-datachat-u13', 'syn-grant-datachat-u14' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri \"v1.0/oauth2PermissionGrants/$_\" }",
+      "GrantIds": [
+        "syn-grant-datachat-u01",
+        "syn-grant-datachat-u02",
+        "syn-grant-datachat-u03",
+        "syn-grant-datachat-u04",
+        "syn-grant-datachat-u05",
+        "syn-grant-datachat-u06",
+        "syn-grant-datachat-u07",
+        "syn-grant-datachat-u08",
+        "syn-grant-datachat-u09",
+        "syn-grant-datachat-u10",
+        "syn-grant-datachat-u11",
+        "syn-grant-datachat-u12",
+        "syn-grant-datachat-u13",
+        "syn-grant-datachat-u14"
+      ]
+    },
+    {
+      "AppDisplayName": "Summarize Everything",
+      "AppId": "a0000000-0000-4000-8000-000000000013",
+      "ServicePrincipalId": "5e000000-0000-4000-8000-000000000013",
+      "Publisher": "Summarize Everything Inc",
+      "PublisherStatus": "Unverified",
+      "IsAIApp": true,
+      "AIMatch": "Name pattern 'Summar' on displayName",
+      "GrantType": "Delegated",
+      "Resource": "Microsoft Graph",
+      "ConsentScope": "SomeUsers",
+      "UserCount": 3,
+      "Permissions": [
+        "Files.Read.All",
+        "Mail.Read",
+        "offline_access",
+        "User.Read"
+      ],
+      "SensitivePermissions": [
+        "Files.Read.All",
+        "Mail.Read"
+      ],
+      "Score": 65,
+      "Level": "High",
+      "Reasons": [
+        "Files.Read.All is the highest weighted permission (35)",
+        "1 more sensitive permission (+5)",
+        "Publisher is not verified (+15)",
+        "offline_access gives the app refresh tokens, so it can reach this data while the user is away (+10)"
+      ],
+      "Notes": [],
+      "RecommendedAction": "Run the AI tool risk assessment this week. Require user assignment for the app or remove the grant.",
+      "RemovalHint": "'syn-grant-summarize-u15', 'syn-grant-summarize-u16', 'syn-grant-summarize-u17' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri \"v1.0/oauth2PermissionGrants/$_\" }",
+      "GrantIds": [
+        "syn-grant-summarize-u15",
+        "syn-grant-summarize-u16",
+        "syn-grant-summarize-u17"
+      ]
+    },
+    {
+      "AppDisplayName": "Contoso CareDesk Assistant",
+      "AppId": "a0000000-0000-4000-8000-000000000014",
+      "ServicePrincipalId": "5e000000-0000-4000-8000-000000000014",
+      "Publisher": "Contoso",
+      "PublisherStatus": "Internal",
+      "IsAIApp": true,
+      "AIMatch": "Name pattern 'Assistant' on displayName",
+      "GrantType": "Delegated",
+      "Resource": "Microsoft Graph",
+      "ConsentScope": "AllUsers",
+      "UserCount": 0,
+      "Permissions": [
+        "Mail.ReadWrite",
+        "openid",
+        "profile",
+        "User.Read"
+      ],
+      "SensitivePermissions": [
+        "Mail.ReadWrite"
+      ],
+      "Score": 55,
+      "Level": "High",
+      "Reasons": [
+        "Mail.ReadWrite is the highest weighted permission (40)",
+        "Consent granted for every user in the tenant (+15)"
+      ],
+      "Notes": [],
+      "RecommendedAction": "Run the AI tool risk assessment this week. Require user assignment for the app or remove the grant.",
+      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri 'v1.0/oauth2PermissionGrants/syn-grant-caredesk-all'",
+      "GrantIds": [
+        "syn-grant-caredesk-all"
+      ]
+    },
+    {
+      "AppDisplayName": "NoteGenie AI Meeting Notes",
+      "AppId": "a0000000-0000-4000-8000-000000000015",
+      "ServicePrincipalId": "5e000000-0000-4000-8000-000000000015",
+      "Publisher": "NoteGenie Inc",
+      "PublisherStatus": "Verified",
+      "IsAIApp": true,
+      "AIMatch": "Name pattern '\\bAI\\b' on displayName",
+      "GrantType": "Delegated",
+      "Resource": "Microsoft Graph",
+      "ConsentScope": "SomeUsers",
+      "UserCount": 12,
+      "Permissions": [
+        "Calendars.Read",
+        "offline_access",
+        "OnlineMeetings.Read",
+        "User.Read"
+      ],
+      "SensitivePermissions": [
+        "Calendars.Read",
+        "OnlineMeetings.Read"
+      ],
+      "Score": 40,
+      "Level": "Medium",
+      "Reasons": [
+        "Calendars.Read is the highest weighted permission (15)",
+        "1 more sensitive permission (+5)",
+        "offline_access gives the app refresh tokens, so it can reach this data while the user is away (+10)",
+        "12 users consented, at or above the threshold of 10 (+10)"
+      ],
+      "Notes": [],
+      "RecommendedAction": "Review at the next access review and confirm the app is on the AI tool register.",
+      "RemovalHint": "'syn-grant-notegenie-u01', 'syn-grant-notegenie-u02', 'syn-grant-notegenie-u03', 'syn-grant-notegenie-u04', 'syn-grant-notegenie-u05', 'syn-grant-notegenie-u06', 'syn-grant-notegenie-u07', 'syn-grant-notegenie-u08', 'syn-grant-notegenie-u09', 'syn-grant-notegenie-u10', 'syn-grant-notegenie-u11', 'syn-grant-notegenie-u12' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri \"v1.0/oauth2PermissionGrants/$_\" }",
+      "GrantIds": [
+        "syn-grant-notegenie-u01",
+        "syn-grant-notegenie-u02",
+        "syn-grant-notegenie-u03",
+        "syn-grant-notegenie-u04",
+        "syn-grant-notegenie-u05",
+        "syn-grant-notegenie-u06",
+        "syn-grant-notegenie-u07",
+        "syn-grant-notegenie-u08",
+        "syn-grant-notegenie-u09",
+        "syn-grant-notegenie-u10",
+        "syn-grant-notegenie-u11",
+        "syn-grant-notegenie-u12"
+      ]
+    },
+    {
+      "AppDisplayName": "QuickDraft AI Writer",
+      "AppId": "a0000000-0000-4000-8000-000000000016",
+      "ServicePrincipalId": "5e000000-0000-4000-8000-000000000016",
+      "Publisher": "QuickDraft Software",
+      "PublisherStatus": "Verified",
+      "IsAIApp": true,
+      "AIMatch": "Name pattern '\\bAI\\b' on displayName",
+      "GrantType": "Delegated",
+      "Resource": "Microsoft Graph",
+      "ConsentScope": "SomeUsers",
+      "UserCount": 1,
+      "Permissions": [
+        "offline_access",
+        "openid",
+        "profile",
+        "User.Read"
+      ],
+      "SensitivePermissions": [],
+      "Score": 0,
+      "Level": "Low",
+      "Reasons": [
+        "No permissions on the sensitive list"
+      ],
+      "Notes": [],
+      "RecommendedAction": "Keep on the inventory. No change needed.",
+      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri 'v1.0/oauth2PermissionGrants/syn-grant-quickdraft-u18'",
+      "GrantIds": [
+        "syn-grant-quickdraft-u18"
+      ]
+    }
+  ]
+}
