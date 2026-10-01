@@ -52,7 +52,7 @@
     "Medium": 25
   },
   "retiringPermissions": {
-    "full_access_as_app": "full_access_as_app is an Exchange Web Services (EWS) permission. Microsoft's EWS retirement in Exchange Online starts blocking non-Microsoft apps on October 1, 2026, in phases, and fully disables EWS in April 2027. Confirm the app has moved to Microsoft Graph, then remove this grant.",
-    "EWS.AccessAsUser.All": "EWS.AccessAsUser.All is an Exchange Web Services (EWS) permission. Microsoft's EWS retirement in Exchange Online starts blocking non-Microsoft apps on October 1, 2026, in phases, and fully disables EWS in April 2027. Confirm the app has moved to Microsoft Graph, then remove this grant."
+    "full_access_as_app": "full_access_as_app is an Exchange Web Services (EWS) permission. Microsoft is retiring EWS in Exchange Online in phases. Disablement starts in October 2026 and applies to all apps, Microsoft's own included. EWS is fully disabled in April 2027. Until then, an app keeps EWS access only if the tenant sets EWSEnabled to True and lists the app in EWSAllowedAppIDs. Confirm the app has moved to Microsoft Graph, then remove this grant.",
+    "EWS.AccessAsUser.All": "EWS.AccessAsUser.All is an Exchange Web Services (EWS) permission. Microsoft is retiring EWS in Exchange Online in phases. Disablement starts in October 2026 and applies to all apps, Microsoft's own included. EWS is fully disabled in April 2027. Until then, an app keeps EWS access only if the tenant sets EWSEnabled to True and lists the app in EWSAllowedAppIDs. Confirm the app has moved to Microsoft Graph, then remove this grant."
   }
 }

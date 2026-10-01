@@ -54,7 +54,7 @@ Report: ./out/report.md
 
 The second command prints the exact Microsoft Graph request it would send, without signing in. A committed copy of the report is in [samples/sample-report](samples/sample-report/report.md).
 
-In the sample tenant the report flags an unverified mail assistant with tenant-wide Mail.ReadWrite and Mail.Send, an analytics app that only its publisher name ties to AI, and a support bot holding full_access_as_app, an Exchange Web Services permission Microsoft is retiring in Exchange Online.
+In the sample tenant the report flags an unverified mail assistant with tenant-wide Mail.ReadWrite and Mail.Send, an analytics app that only its publisher name ties to AI, and a support bot holding full_access_as_app, an Exchange Web Services permission Microsoft is retiring in Exchange Online in phases from October 2026.
 
 ## Run it against a tenant
 
@@ -71,7 +71,7 @@ The inventory signs in with three delegated read scopes and sends GET requests o
 | Directory.Read.All | Delegated permission grants. Microsoft lists it as the least privileged scope for that call. |
 | Policy.Read.All | The authorization policy and the admin consent request policy |
 
-These scopes need admin consent for the Microsoft Graph Command Line Tools app the first time. Sign in with a read-only role. Microsoft's API pages list Global Reader for the grant, service principal, and admin consent policy reads.
+These scopes need admin consent for the Microsoft Graph Command Line Tools app the first time. Sign in with a read-only role. Microsoft's API pages list Global Reader for the grant, service principal, and admin consent policy reads. The app role assignment page lists Directory Readers and several admin roles but not Global Reader, and the authorization policy page lists no roles, so confirm your role can make every call before a first run. The removal commands the report prints need a write role such as Cloud Application Administrator.
 
 A snapshot is a copy of directory data, including app names, publishers, and user object IDs. Store it like any other directory export. `.gitignore` excludes `*.snapshot.json` and `out/`, so neither lands in a commit by accident. A saved snapshot can be analyzed again offline with `-SnapshotPath`.
 
@@ -95,12 +95,12 @@ A snapshot is a copy of directory data, including app names, publishers, and use
 
 Before a live run:
 
-- A PATCH to `permissionGrantPoliciesAssigned` replaces the whole list. The script keeps every `ManagePermissionGrantsForOwnedResource` entry already there, so resource-specific consent for teams and chats does not change as a side effect.
-- Changing user consent needs the Privileged Role Administrator role or higher.
-- For the admin consent workflow, Microsoft's setup guide calls for Global Administrator, while the Graph API reference lists Cloud Application Administrator and Application Administrator. Try the lower role first.
-- `LowRiskVerified` depends on your permission classifications. Microsoft names openid, profile, email, and offline_access as the minimum for basic sign-in, which makes them a reasonable first set to classify as low impact.
-- Entra also offers a Microsoft managed consent option. The script does not set it. If a tenant has the `microsoft-user-default-recommended` policy assigned, the inventory reports `MicrosoftManaged`.
-- Reviewers are user object IDs. Group and role reviewers are not supported yet.
+- Microsoft Learn tells you to include your current `ManagePermissionGrantsForOwnedResource` entries whenever you update `permissionGrantPoliciesAssigned`. The script sends the full list and keeps every such entry already there, so resource-specific consent does not change as a side effect. The built-in team and chat policies are among those entries.
+- Changing user consent needs the Privileged Role Administrator role, the least privileged role Microsoft lists for this call. The Entra admin center path calls for Global Administrator.
+- For the admin consent workflow, Microsoft's setup guide calls for Global Administrator, while the Graph API reference lists Cloud Application Administrator and Application Administrator. Try the lower role first. Only Global Administrators can approve requests for Microsoft Graph application permissions, and naming someone a reviewer does not raise their rights.
+- `LowRiskVerified` depends on your permission classifications. Microsoft names openid, profile, email, and offline_access as the minimum for basic sign-in, which makes them a reasonable first set to classify as low impact. Only delegated permissions that do not need admin consent can be classified.
+- Entra also offers a Microsoft managed consent option. Microsoft Learn calls it the default for new tenants but does not say which policy ID it writes. The script does not set it. If a tenant has the `microsoft-user-default-recommended` policy assigned, the inventory reports `MicrosoftManaged`.
+- Reviewers are user object IDs. The Entra portal also allows groups and roles as reviewers, but this script sets users only.
 
 ## How scoring works
 
@@ -123,11 +123,11 @@ Every finding lists the reasons behind its score, so a reviewer can check the ma
 
 `config/ai-app-watchlist.json` holds two lists of patterns, checked against each app's display name, publisher name, and verified publisher name. Vendor patterns (OpenAI, Anthropic, Otter, and others) are checked first and count as the stronger match. Generic patterns (AI, GPT, LLM, Assistant, Summar, and others) catch the rest. Matching is a heuristic, and every match needs a person to look at it. Run with `-IncludeNonAI` to score every non-Microsoft app in the tenant.
 
-Microsoft first-party apps are skipped, identified by the owner tenant IDs Microsoft publishes.
+Microsoft first-party apps are skipped, identified by two known Microsoft owner tenant IDs taken from Microsoft's first-party troubleshooting guidance. That list is not guaranteed to be complete.
 
 ## Framework mapping
 
-The policy, the assessment, and the scripts map to the NIST AI Risk Management Framework (AI RMF 1.0), its Generative AI Profile (NIST AI 600-1), and the OWASP Top 10 for LLM Applications 2025. See [docs/framework-mapping.md](docs/framework-mapping.md). The mapping shows where each part contributes. Using the kit does not make an organization compliant with any of them.
+The policy, the assessment, and the scripts map to the NIST AI Risk Management Framework (AI RMF 1.0), its Generative AI Profile (NIST AI 600-1), and the OWASP Top 10 for LLM Applications 2026 edition. See [docs/framework-mapping.md](docs/framework-mapping.md). The mapping shows where each part contributes. Using the kit does not make an organization compliant with any of them.
 
 ## Tests
 
