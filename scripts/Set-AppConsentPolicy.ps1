@@ -28,7 +28,8 @@ consent to.
 Object IDs of the users who review consent requests.
 
 .PARAMETER RequestDurationInDays
-Days a request stays open before it expires. Defaults to 7.
+Days a request stays open before it expires. The script defaults to 7 and
+accepts 1 to 365. Microsoft documents neither a default nor a range.
 
 .PARAMETER TenantId
 Tenant to sign in to for a live run.
@@ -101,7 +102,7 @@ else {
 
 if ($UserConsent) {
     $authorizationPolicy = if ($live) {
-        Invoke-MgGraphRequest -Method GET -Uri 'v1.0/policies/authorizationPolicy' -OutputType PSObject
+        Invoke-MgGraphRequest -Method GET -Uri '/v1.0/policies/authorizationPolicy' -OutputType PSObject
     }
     else {
         $snapshot.authorizationPolicy
@@ -117,12 +118,12 @@ if ($UserConsent) {
     $bodyJson = $body | ConvertTo-Json -Depth 5
 
     "User consent now: $($before.Mode). $($before.Description)" | Out-Host
-    'Planned request: PATCH v1.0/policies/authorizationPolicy' | Out-Host
+    'Planned request: PATCH /v1.0/policies/authorizationPolicy' | Out-Host
     $bodyJson | Out-Host
 
     if ($live -and $PSCmdlet.ShouldProcess('authorizationPolicy', "Set user consent to $UserConsent")) {
-        $null = Invoke-MgGraphRequest -Method PATCH -Uri 'v1.0/policies/authorizationPolicy' -Body $bodyJson -ContentType 'application/json'
-        $after = Invoke-MgGraphRequest -Method GET -Uri 'v1.0/policies/authorizationPolicy' -OutputType PSObject
+        $null = Invoke-MgGraphRequest -Method PATCH -Uri '/v1.0/policies/authorizationPolicy' -Body $bodyJson -ContentType 'application/json'
+        $after = Invoke-MgGraphRequest -Method GET -Uri '/v1.0/policies/authorizationPolicy' -OutputType PSObject
         $afterState = Get-AIGUserConsentState -AuthorizationPolicy $after
         "User consent after the change: $($afterState.Mode)." | Out-Host
         if ($afterState.Mode -ne $UserConsent) {
@@ -133,7 +134,7 @@ if ($UserConsent) {
 
 if ($EnableAdminConsentWorkflow) {
     $workflowBefore = if ($live) {
-        Invoke-MgGraphRequest -Method GET -Uri 'v1.0/policies/adminConsentRequestPolicy' -OutputType PSObject
+        Invoke-MgGraphRequest -Method GET -Uri '/v1.0/policies/adminConsentRequestPolicy' -OutputType PSObject
     }
     else {
         $snapshot.adminConsentRequestPolicy
@@ -143,12 +144,12 @@ if ($EnableAdminConsentWorkflow) {
     $workflowJson = $workflowBody | ConvertTo-Json -Depth 5
 
     "Admin consent workflow now: $workflowState." | Out-Host
-    'Planned request: PUT v1.0/policies/adminConsentRequestPolicy' | Out-Host
+    'Planned request: PUT /v1.0/policies/adminConsentRequestPolicy' | Out-Host
     $workflowJson | Out-Host
 
     if ($live -and $PSCmdlet.ShouldProcess('adminConsentRequestPolicy', 'Turn on the admin consent workflow')) {
-        $null = Invoke-MgGraphRequest -Method PUT -Uri 'v1.0/policies/adminConsentRequestPolicy' -Body $workflowJson -ContentType 'application/json'
-        $workflowAfter = Invoke-MgGraphRequest -Method GET -Uri 'v1.0/policies/adminConsentRequestPolicy' -OutputType PSObject
+        $null = Invoke-MgGraphRequest -Method PUT -Uri '/v1.0/policies/adminConsentRequestPolicy' -Body $workflowJson -ContentType 'application/json'
+        $workflowAfter = Invoke-MgGraphRequest -Method GET -Uri '/v1.0/policies/adminConsentRequestPolicy' -OutputType PSObject
         "Admin consent workflow after the change: enabled $($workflowAfter.isEnabled), $(@($workflowAfter.reviewers).Count) reviewer(s)." | Out-Host
         if (-not $workflowAfter.isEnabled) {
             Write-Warning 'The admin consent workflow still reads as off. Check the policy in the Entra admin center.'

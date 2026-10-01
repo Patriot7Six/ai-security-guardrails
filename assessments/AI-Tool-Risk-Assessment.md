@@ -24,7 +24,7 @@ Any one of these ends the review at Not approved until it is fixed.
 
 ## How to score
 
-Score each question 0 (no, or unknown), 1 (partly, or only with a workaround), or 2 (yes, with evidence on file). Each section heading shows the NIST AI RMF function and the OWASP Top 10 for LLM Applications (2025) items the section covers.
+Score each question 0 (no, or unknown), 1 (partly, or only with a workaround), or 2 (yes, with evidence on file). Each section heading shows the NIST AI RMF function and the OWASP Top 10 for LLM Applications (2026) items the section covers.
 
 ### A. Use case and data (MAP, LLM02)
 
@@ -37,19 +37,19 @@ Score each question 0 (no, or unknown), 1 (partly, or only with a workaround), o
 | A5 | Can we delete our data on request and at contract end? | | |
 | A6 | Is data stored and processed in regions we accept? | | |
 
-### B. Identity and access (GOVERN, MANAGE, LLM06)
+### B. Identity and access (GOVERN, MANAGE, LLM03)
 
 | # | Question | Score | Evidence |
 | --- | --- | --- | --- |
 | B1 | Does the tool support single sign-on with Microsoft Entra ID? | | |
 | B2 | Are the requested permissions the minimum the feature needs? List each one. | | |
 | B3 | Does it use delegated permissions where it can, instead of application permissions? | | |
-| B4 | If it needs application permissions, can they be scoped to named sites or mailboxes (Sites.Selected for SharePoint, RBAC for Applications in Exchange Online)? | | |
+| B4 | If it needs application permissions, can they be scoped to named sites or mailboxes (Sites.Selected for SharePoint, RBAC for Applications in Exchange Online), with the broad Entra grant removed afterward? | | |
 | B5 | If it asks for offline_access, is there a business reason for access while the user is away? | | |
 | B6 | Can the pilot be limited to an assigned group (user assignment required)? | | |
 | B7 | Can the tool act on its own, such as sending mail, changing files, or calling APIs, without a person approving each action? If yes, are the limits written down? | | |
 
-### C. Model behavior (MEASURE, LLM01, LLM05, LLM07, LLM08, LLM09)
+### C. Model behavior (MEASURE, LLM01, LLM07, LLM08, LLM09, LLM10)
 
 | # | Question | Score | Evidence |
 | --- | --- | --- | --- |
@@ -60,7 +60,7 @@ Score each question 0 (no, or unknown), 1 (partly, or only with a workaround), o
 | C5 | Did a short test with our own sample content give acceptable results? Attach the test notes. | | |
 | C6 | If the tool indexes our content for retrieval, does it enforce each user's existing permissions on what it returns? | | |
 
-### D. Vendor and supply chain (GOVERN, LLM03, LLM04)
+### D. Vendor and supply chain (GOVERN, LLM04, LLM05)
 
 | # | Question | Score | Evidence |
 | --- | --- | --- | --- |
@@ -70,7 +70,7 @@ Score each question 0 (no, or unknown), 1 (partly, or only with a workaround), o
 | D4 | Does the vendor explain how it protects training and fine-tuning data from tampering? | | |
 | D5 | Does the contract name a security contact and a breach notice period? | | |
 
-### E. Monitoring and exit (MANAGE, LLM10)
+### E. Monitoring and exit (MANAGE, LLM06)
 
 | # | Question | Score | Evidence |
 | --- | --- | --- | --- |

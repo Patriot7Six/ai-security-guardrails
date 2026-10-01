@@ -11,11 +11,14 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     defaults:
       run:
         shell: pwsh
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Install modules
         run: |
@@ -25,6 +28,8 @@ jobs:
 
       - name: Lint
         run: |
+          # The runner image may preinstall a newer PSScriptAnalyzer, so load the pinned one.
+          Import-Module -Name PSScriptAnalyzer -RequiredVersion 1.24.0
           $results = @(Invoke-ScriptAnalyzer -Path . -Recurse -Settings ./PSScriptAnalyzerSettings.psd1)
           $results | ForEach-Object { "$($_.ScriptName):$($_.Line) [$($_.Severity)] $($_.RuleName) $($_.Message)" }
           if ($results.Count -gt 0) { throw "PSScriptAnalyzer reported $($results.Count) issue(s)." }

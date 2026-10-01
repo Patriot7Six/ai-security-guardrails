@@ -2,7 +2,7 @@
   "tenantLabel": "Contoso",
   "tenantId": "a1b2c3d4-0000-4000-8000-00000000c0f1",
   "snapshotCapturedAt": "2026-09-28 15:00 UTC",
-  "generatedAt": "2026-10-01 19:16 UTC",
+  "generatedAt": "2026-10-01 21:48 UTC",
   "userConsent": {
     "mode": "AllApps",
     "description": "Users can consent to any app for permissions that do not need admin consent. This is the legacy setting.",
@@ -48,10 +48,10 @@
         "Runs as the app with no signed-in user and reaches data across the tenant unless scoped"
       ],
       "Notes": [
-        "full_access_as_app is an Exchange Web Services (EWS) permission. Microsoft's EWS retirement in Exchange Online starts blocking non-Microsoft apps on October 1, 2026, in phases, and fully disables EWS in April 2027. Confirm the app has moved to Microsoft Graph, then remove this grant."
+        "full_access_as_app is an Exchange Web Services (EWS) permission. Microsoft is retiring EWS in Exchange Online in phases. Disablement starts in October 2026 and applies to all apps, Microsoft's own included. EWS is fully disabled in April 2027. Until then, an app keeps EWS access only if the tenant sets EWSEnabled to True and lists the app in EWSAllowedAppIDs. Confirm the app has moved to Microsoft Graph, then remove this grant."
       ],
       "RecommendedAction": "Confirm the business owner and data flow today. If there is no approved use, remove the app role assignment and disable sign-in for the app.",
-      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri 'v1.0/servicePrincipals/5e000000-0000-4000-8000-000000000010/appRoleAssignments/syn-assign-supportbot-exo'",
+      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri '/v1.0/servicePrincipals/5e000000-0000-4000-8000-000000000010/appRoleAssignments/syn-assign-supportbot-exo'",
       "GrantIds": [
         "syn-assign-supportbot-exo"
       ]
@@ -91,7 +91,7 @@
       ],
       "Notes": [],
       "RecommendedAction": "Confirm the business owner and data flow today. If there is no approved use, remove the grant and disable sign-in for the app.",
-      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri 'v1.0/oauth2PermissionGrants/syn-grant-inboxpilot-all'",
+      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri '/v1.0/oauth2PermissionGrants/syn-grant-inboxpilot-all'",
       "GrantIds": [
         "syn-grant-inboxpilot-all"
       ]
@@ -131,7 +131,7 @@
       ],
       "Notes": [],
       "RecommendedAction": "Confirm the business owner and data flow today. If there is no approved use, remove the grant and disable sign-in for the app.",
-      "RemovalHint": "'syn-grant-datachat-u01', 'syn-grant-datachat-u02', 'syn-grant-datachat-u03', 'syn-grant-datachat-u04', 'syn-grant-datachat-u05', 'syn-grant-datachat-u06', 'syn-grant-datachat-u07', 'syn-grant-datachat-u08', 'syn-grant-datachat-u09', 'syn-grant-datachat-u10', 'syn-grant-datachat-u11', 'syn-grant-datachat-u12', 'syn-grant-datachat-u13', 'syn-grant-datachat-u14' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri \"v1.0/oauth2PermissionGrants/$_\" }",
+      "RemovalHint": "'syn-grant-datachat-u01', 'syn-grant-datachat-u02', 'syn-grant-datachat-u03', 'syn-grant-datachat-u04', 'syn-grant-datachat-u05', 'syn-grant-datachat-u06', 'syn-grant-datachat-u07', 'syn-grant-datachat-u08', 'syn-grant-datachat-u09', 'syn-grant-datachat-u10', 'syn-grant-datachat-u11', 'syn-grant-datachat-u12', 'syn-grant-datachat-u13', 'syn-grant-datachat-u14' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri \"/v1.0/oauth2PermissionGrants/$_\" }",
       "GrantIds": [
         "syn-grant-datachat-u01",
         "syn-grant-datachat-u02",
@@ -181,7 +181,7 @@
       ],
       "Notes": [],
       "RecommendedAction": "Run the AI tool risk assessment this week. Require user assignment for the app or remove the grant.",
-      "RemovalHint": "'syn-grant-summarize-u15', 'syn-grant-summarize-u16', 'syn-grant-summarize-u17' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri \"v1.0/oauth2PermissionGrants/$_\" }",
+      "RemovalHint": "'syn-grant-summarize-u15', 'syn-grant-summarize-u16', 'syn-grant-summarize-u17' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri \"/v1.0/oauth2PermissionGrants/$_\" }",
       "GrantIds": [
         "syn-grant-summarize-u15",
         "syn-grant-summarize-u16",
@@ -217,7 +217,7 @@
       ],
       "Notes": [],
       "RecommendedAction": "Run the AI tool risk assessment this week. Require user assignment for the app or remove the grant.",
-      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri 'v1.0/oauth2PermissionGrants/syn-grant-caredesk-all'",
+      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri '/v1.0/oauth2PermissionGrants/syn-grant-caredesk-all'",
       "GrantIds": [
         "syn-grant-caredesk-all"
       ]
@@ -254,7 +254,7 @@
       ],
       "Notes": [],
       "RecommendedAction": "Review at the next access review and confirm the app is on the AI tool register.",
-      "RemovalHint": "'syn-grant-notegenie-u01', 'syn-grant-notegenie-u02', 'syn-grant-notegenie-u03', 'syn-grant-notegenie-u04', 'syn-grant-notegenie-u05', 'syn-grant-notegenie-u06', 'syn-grant-notegenie-u07', 'syn-grant-notegenie-u08', 'syn-grant-notegenie-u09', 'syn-grant-notegenie-u10', 'syn-grant-notegenie-u11', 'syn-grant-notegenie-u12' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri \"v1.0/oauth2PermissionGrants/$_\" }",
+      "RemovalHint": "'syn-grant-notegenie-u01', 'syn-grant-notegenie-u02', 'syn-grant-notegenie-u03', 'syn-grant-notegenie-u04', 'syn-grant-notegenie-u05', 'syn-grant-notegenie-u06', 'syn-grant-notegenie-u07', 'syn-grant-notegenie-u08', 'syn-grant-notegenie-u09', 'syn-grant-notegenie-u10', 'syn-grant-notegenie-u11', 'syn-grant-notegenie-u12' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri \"/v1.0/oauth2PermissionGrants/$_\" }",
       "GrantIds": [
         "syn-grant-notegenie-u01",
         "syn-grant-notegenie-u02",
@@ -296,7 +296,7 @@
       ],
       "Notes": [],
       "RecommendedAction": "Keep on the inventory. No change needed.",
-      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri 'v1.0/oauth2PermissionGrants/syn-grant-quickdraft-u18'",
+      "RemovalHint": "Invoke-MgGraphRequest -Method DELETE -Uri '/v1.0/oauth2PermissionGrants/syn-grant-quickdraft-u18'",
       "GrantIds": [
         "syn-grant-quickdraft-u18"
       ]

@@ -137,7 +137,7 @@ function Get-AIGRecommendedAction {
         'High' {
             $review = if ($IsAIApp) { 'Run the AI tool risk assessment this week.' } else { 'Review the business need this week.' }
             $limit = if ($GrantType -eq 'Application') {
-                'Scope the permission to named sites or mailboxes (Sites.Selected for SharePoint, RBAC for Applications in Exchange Online) or remove it.'
+                'Scope the permission to named sites or mailboxes (Sites.Selected plus a per-site grant for SharePoint, RBAC for Applications in Exchange Online) and then remove the broad Entra grant, or remove it. For Exchange, a scoped role next to an unscoped Entra grant leaves the app unscoped.'
             }
             else {
                 'Require user assignment for the app or remove the grant.'
@@ -172,10 +172,10 @@ function Get-AIGRemovalHint {
     )
 
     $template = if ($GrantType -eq 'Delegated') {
-        'v1.0/oauth2PermissionGrants/{0}'
+        '/v1.0/oauth2PermissionGrants/{0}'
     }
     else {
-        "v1.0/servicePrincipals/$ServicePrincipalId/appRoleAssignments/{0}"
+        "/v1.0/servicePrincipals/$ServicePrincipalId/appRoleAssignments/{0}"
     }
     if ($GrantId.Count -eq 1) {
         return "Invoke-MgGraphRequest -Method DELETE -Uri '$($template -f $GrantId[0])'"
@@ -297,21 +297,21 @@ function Get-AIGTenantSnapshot {
     }
 
     $select = 'id,appId,displayName,publisherName,verifiedPublisher,appOwnerOrganizationId,servicePrincipalType,accountEnabled,appRoleAssignmentRequired,appRoles'
-    $servicePrincipals = Invoke-AIGGraphPaged -Uri "v1.0/servicePrincipals?`$select=$select&`$top=999"
-    $grants = Invoke-AIGGraphPaged -Uri 'v1.0/oauth2PermissionGrants'
+    $servicePrincipals = Invoke-AIGGraphPaged -Uri "/v1.0/servicePrincipals?`$select=$select&`$top=100"
+    $grants = Invoke-AIGGraphPaged -Uri '/v1.0/oauth2PermissionGrants'
 
     $assignments = [System.Collections.Generic.List[object]]::new()
     foreach ($servicePrincipal in $servicePrincipals) {
         if (Test-AIGFirstParty -ServicePrincipal $servicePrincipal -FirstPartyTenantIds $FirstPartyTenantIds) {
             continue
         }
-        foreach ($assignment in (Invoke-AIGGraphPaged -Uri "v1.0/servicePrincipals/$($servicePrincipal.id)/appRoleAssignments")) {
+        foreach ($assignment in (Invoke-AIGGraphPaged -Uri "/v1.0/servicePrincipals/$($servicePrincipal.id)/appRoleAssignments")) {
             $assignments.Add($assignment)
         }
     }
 
-    $authorizationPolicy = Invoke-MgGraphRequest -Method GET -Uri 'v1.0/policies/authorizationPolicy' -OutputType PSObject
-    $adminConsentRequestPolicy = Invoke-MgGraphRequest -Method GET -Uri 'v1.0/policies/adminConsentRequestPolicy' -OutputType PSObject
+    $authorizationPolicy = Invoke-MgGraphRequest -Method GET -Uri '/v1.0/policies/authorizationPolicy' -OutputType PSObject
+    $adminConsentRequestPolicy = Invoke-MgGraphRequest -Method GET -Uri '/v1.0/policies/adminConsentRequestPolicy' -OutputType PSObject
 
     $label = if ($TenantLabel) { $TenantLabel } else { [string] $context.TenantId }
     $capturedAt = [datetime]::UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'", [cultureinfo]::InvariantCulture)
@@ -842,15 +842,16 @@ function Get-AIGPermissionGrantPolicyUpdate {
 function Get-AIGAdminConsentRequestPolicyBody {
     <#
     .SYNOPSIS
-    Builds the PUT body for v1.0/policies/adminConsentRequestPolicy.
+    Builds the PUT body for /v1.0/policies/adminConsentRequestPolicy.
 
     .PARAMETER ReviewerUserId
-    Object IDs of the users who review requests. Group and role reviewers are not
-    supported here.
+    Object IDs of the users who review requests. This function builds user
+    reviewers only. The Entra portal also allows groups and roles.
 
     .PARAMETER RequestDurationInDays
-    Days a request stays open. The 1 to 365 range is a local sanity check.
-    Microsoft Graph does not document a range for this property.
+    Days a request stays open. The 1 to 365 range and the default of 7 are this
+    script's own choices. Microsoft Graph and Entra document neither a range nor a
+    default for this property.
     #>
     [CmdletBinding()]
     [OutputType([System.Collections.Specialized.OrderedDictionary])]
@@ -1147,7 +1148,7 @@ function Export-AIGReport {
             $lines.Add("# $($item.AppDisplayName) ($($item.Level), $($item.Score))")
             $lines.Add($item.RemovalHint)
             if ($item.Level -eq 'Critical' -and $disabled.Add($item.ServicePrincipalId)) {
-                $lines.Add("Invoke-MgGraphRequest -Method PATCH -Uri 'v1.0/servicePrincipals/$($item.ServicePrincipalId)' -Body @{ accountEnabled = `$false }")
+                $lines.Add("Invoke-MgGraphRequest -Method PATCH -Uri '/v1.0/servicePrincipals/$($item.ServicePrincipalId)' -Body @{ accountEnabled = `$false }")
             }
         }
         $lines.Add('```')

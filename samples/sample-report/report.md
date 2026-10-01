@@ -1,6 +1,6 @@
 # AI app consent report: Contoso
 
-Tenant `a1b2c3d4-0000-4000-8000-00000000c0f1`. Snapshot captured 2026-09-28 15:00 UTC. Report generated 2026-10-01 19:16 UTC.
+Tenant `a1b2c3d4-0000-4000-8000-00000000c0f1`. Snapshot captured 2026-09-28 15:00 UTC. Report generated 2026-10-01 21:48 UTC.
 
 ## Consent posture
 
@@ -43,7 +43,7 @@ Score reasons:
 - full_access_as_app is the highest weighted permission (90)
 - Runs as the app with no signed-in user and reaches data across the tenant unless scoped
 
-full_access_as_app is an Exchange Web Services (EWS) permission. Microsoft's EWS retirement in Exchange Online starts blocking non-Microsoft apps on October 1, 2026, in phases, and fully disables EWS in April 2027. Confirm the app has moved to Microsoft Graph, then remove this grant.
+full_access_as_app is an Exchange Web Services (EWS) permission. Microsoft is retiring EWS in Exchange Online in phases. Disablement starts in October 2026 and applies to all apps, Microsoft's own included. EWS is fully disabled in April 2027. Until then, an app keeps EWS access only if the tenant sets EWSEnabled to True and lists the app in EWSAllowedAppIDs. Confirm the app has moved to Microsoft Graph, then remove this grant.
 
 Confirm the business owner and data flow today. If there is no approved use, remove the app role assignment and disable sign-in for the app.
 
@@ -153,20 +153,20 @@ Access tokens an app already holds keep working until they expire. For Critical 
 Connect-MgGraph -Scopes 'DelegatedPermissionGrant.ReadWrite.All', 'AppRoleAssignment.ReadWrite.All', 'Application.ReadWrite.All'
 
 # SupportBot GPT Connector (Critical, 90)
-Invoke-MgGraphRequest -Method DELETE -Uri 'v1.0/servicePrincipals/5e000000-0000-4000-8000-000000000010/appRoleAssignments/syn-assign-supportbot-exo'
-Invoke-MgGraphRequest -Method PATCH -Uri 'v1.0/servicePrincipals/5e000000-0000-4000-8000-000000000010' -Body @{ accountEnabled = $false }
+Invoke-MgGraphRequest -Method DELETE -Uri '/v1.0/servicePrincipals/5e000000-0000-4000-8000-000000000010/appRoleAssignments/syn-assign-supportbot-exo'
+Invoke-MgGraphRequest -Method PATCH -Uri '/v1.0/servicePrincipals/5e000000-0000-4000-8000-000000000010' -Body @{ accountEnabled = $false }
 
 # InboxPilot AI (Critical, 85)
-Invoke-MgGraphRequest -Method DELETE -Uri 'v1.0/oauth2PermissionGrants/syn-grant-inboxpilot-all'
-Invoke-MgGraphRequest -Method PATCH -Uri 'v1.0/servicePrincipals/5e000000-0000-4000-8000-000000000011' -Body @{ accountEnabled = $false }
+Invoke-MgGraphRequest -Method DELETE -Uri '/v1.0/oauth2PermissionGrants/syn-grant-inboxpilot-all'
+Invoke-MgGraphRequest -Method PATCH -Uri '/v1.0/servicePrincipals/5e000000-0000-4000-8000-000000000011' -Body @{ accountEnabled = $false }
 
 # DataChat Analyst (Critical, 80)
-'syn-grant-datachat-u01', 'syn-grant-datachat-u02', 'syn-grant-datachat-u03', 'syn-grant-datachat-u04', 'syn-grant-datachat-u05', 'syn-grant-datachat-u06', 'syn-grant-datachat-u07', 'syn-grant-datachat-u08', 'syn-grant-datachat-u09', 'syn-grant-datachat-u10', 'syn-grant-datachat-u11', 'syn-grant-datachat-u12', 'syn-grant-datachat-u13', 'syn-grant-datachat-u14' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri "v1.0/oauth2PermissionGrants/$_" }
-Invoke-MgGraphRequest -Method PATCH -Uri 'v1.0/servicePrincipals/5e000000-0000-4000-8000-000000000012' -Body @{ accountEnabled = $false }
+'syn-grant-datachat-u01', 'syn-grant-datachat-u02', 'syn-grant-datachat-u03', 'syn-grant-datachat-u04', 'syn-grant-datachat-u05', 'syn-grant-datachat-u06', 'syn-grant-datachat-u07', 'syn-grant-datachat-u08', 'syn-grant-datachat-u09', 'syn-grant-datachat-u10', 'syn-grant-datachat-u11', 'syn-grant-datachat-u12', 'syn-grant-datachat-u13', 'syn-grant-datachat-u14' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri "/v1.0/oauth2PermissionGrants/$_" }
+Invoke-MgGraphRequest -Method PATCH -Uri '/v1.0/servicePrincipals/5e000000-0000-4000-8000-000000000012' -Body @{ accountEnabled = $false }
 
 # Summarize Everything (High, 65)
-'syn-grant-summarize-u15', 'syn-grant-summarize-u16', 'syn-grant-summarize-u17' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri "v1.0/oauth2PermissionGrants/$_" }
+'syn-grant-summarize-u15', 'syn-grant-summarize-u16', 'syn-grant-summarize-u17' | ForEach-Object { Invoke-MgGraphRequest -Method DELETE -Uri "/v1.0/oauth2PermissionGrants/$_" }
 
 # Contoso CareDesk Assistant (High, 55)
-Invoke-MgGraphRequest -Method DELETE -Uri 'v1.0/oauth2PermissionGrants/syn-grant-caredesk-all'
+Invoke-MgGraphRequest -Method DELETE -Uri '/v1.0/oauth2PermissionGrants/syn-grant-caredesk-all'
 ```
